@@ -1,0 +1,4 @@
+name: tensorboard
+dependencies:
+  - numpy
+  - torchvision
