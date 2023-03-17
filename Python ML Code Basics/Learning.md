@@ -1,0 +1,34 @@
+## PIL Image to tensor data
+If the image is in png form, the PIL Image would have 4 channels. The 4th channel is transparency channel for pixels that are transparent in png image. 
+In neural models, in most cases, we need 3 channel Image, RGB. 
+### Convert RGBA img to RGB img
+```python
+from PIL import Image
+
+_rgba_img=Image.open("path to image")  #(h,w,ch)=(h,w,4)
+_rgb_img=_rgba_img.convert("RGB") #(h,w,ch)=(h,w,3)
+```
+
+ Below is the way to convert rgb PIL Image to tensor:
+ ```python
+    from torchvision import transforms
+
+    convert_to_tensor=transforms.ToTensor() #operator for transforming
+    data=convert_to_tensor(_rgb_img) # shape=(ch,h,w)
+    print(data.size())
+```
+
+## Add Dimension to tensor
+```python
+import torch
+
+data=torch.zeros(5) 
+#tensor([ 0.,  0.,  0.,  0.,  0.]) size=([5])
+
+data_1=data[None,:]
+#tensor([[ 0.,  0.,  0.,  0.,  0.]]) size=([1,5])
+
+data_2=data[None,None,:]
+#tensor([[[ 0.,  0.,  0.,  0.,  0.]]]) size=([1,1,5])
+
+```

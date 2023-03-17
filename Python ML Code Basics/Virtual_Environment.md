@@ -13,12 +13,12 @@ conda env create -f environment.yml
 ```
 To activate virtual environment:
 ``` 
-source activate environment.yml
+source activate (environment->name)
 ```
 In terminal,(environment name) will change if activated.
 To deactivate:
 ```
-source deactivate
+conda deactivate
  ```
  ---
 
@@ -36,3 +36,14 @@ dependencies:
     - ...
 ```
 Now, do the [things as if environment.yml is given](#environmentyml-given)
+
+### **Update Libraries in environment.yml**
+deactivate current environment, then
+```
+conda env create -f environment.yml --force
+```
+
+### **Update Conda**
+```
+conda update -n base -c defaults conda
+```
