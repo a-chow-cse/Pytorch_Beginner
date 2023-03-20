@@ -32,3 +32,30 @@ data_2=data[None,None,:]
 #tensor([[[ 0.,  0.,  0.,  0.,  0.]]]) size=([1,1,5])
 
 ```
+
+### Finetune: Freeze parameters 
+```python
+from torch import nn, optim
+
+model=resnet18(weights=ResNet18_Weights.DEFAULT)
+
+for param in model.parameters():
+    param.requires_grad= False
+
+#change last layer of model
+model.fc = nn.linear(512,10)
+# a new layer is unfrozen by default
+```
+
+## Components of a Neural Network
+- Define model class
+- Process Input according to model
+- Define Loss Function
+- Define optimizer
+- Initialize model
+- Create a loop for training
+    - give input x to model to get prediction
+    - use the defined loss function to loss
+    - do model.zero_grad() to zero the gradient
+    - loss.backward() to calculate grad
+    - optimizer.step() to update the parameters

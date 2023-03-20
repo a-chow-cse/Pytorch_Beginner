@@ -24,4 +24,12 @@ data=data[None,:]
 
 label= torch.rand(1,1000)
 
-prediction= model(data)
+optimizer= torch.optim.SGD(model.parameters(),lr=0.02,momentum=0.9)
+
+for i in range(100):
+    prediction= model(data)
+    loss=abs(prediction-label).sum()
+    print(loss)
+    model.zero_grad()
+    loss.backward()
+    optimizer.step()
