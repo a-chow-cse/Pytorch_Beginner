@@ -6,7 +6,8 @@
     - Easier to create environment
 
 ---
-### **Environment.yml given**
+## **Conda**
+### Environment.yml given
 Run the following commands:
 ```
 conda env create -f environment.yml
@@ -22,7 +23,7 @@ conda deactivate
  ```
  ---
 
-### **Create a new environment**
+### Create a new environment
 Go to the folder,
 ```
 touch environment.yml
@@ -37,13 +38,33 @@ dependencies:
 ```
 Now, do the [things as if environment.yml is given](#environmentyml-given)
 
-### **Update Libraries in environment.yml**
+### Update Libraries in environment.yml
 deactivate current environment, then
 ```
 conda env create -f environment.yml --force
 ```
 
-### **Update Conda**
+### Update Conda
 ```
 conda update -n base -c defaults conda
 ```
+---
+## **PIP**
+### Create virtual environment using pip
+```
+python3 -m venv env
+```
+This will create a folder env for virtual environment packages
+### Activate 
+```
+source env/bin/activate
+```
+### Deactivate
+```
+deactivate
+```
+### Install Packages inside virtaul environment
+```
+python3 -m pip install library_name
+```
+---
