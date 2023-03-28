@@ -20,16 +20,16 @@ trainer = Trainer(
     diffusion,
     './ddpm_datasets/ThreeFromBoth/',
     train_batch_size= 3,
-    train_lr = 1e-4,
-    train_num_steps = 10000,
-    gradient_accumulate_every = 2,
+    train_lr = 8e-5,
+    train_num_steps = 30000,
+    gradient_accumulate_every = 1,
     save_and_sample_every=100,
     ema_decay = 0.995,
     amp = False,
     fp16=True,
     calculate_fid = True
 )
-#trainer.load(44)
+trainer.load(200)
 
 trainer.train()
 
