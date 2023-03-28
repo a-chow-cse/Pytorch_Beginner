@@ -1,4 +1,5 @@
 import torch
+from torchvision import transforms as T, utils
 
 from denoising_diffusion_pytorch import Unet, GaussianDiffusion,Trainer
 
@@ -7,15 +8,30 @@ model=Unet(
     dim_mults= (1,2,4,8)
 )
 
-model= torch.load('./results/model-124.pt')
-
 diffusion = GaussianDiffusion (
     model,
     image_size = 128,
     timesteps = 1000,
-    sampling_timesteps = 250,
+    #sampling_timesteps = 250,
     loss_type = 'l1'
 )
+trainer = Trainer(
+    diffusion,
+    './ddpm_datasets/ThreeFromBoth/',
+    train_batch_size= 4,
+    train_lr = 1e-4,
+    train_num_steps = 30000,
+    gradient_accumulate_every = 2,
+    save_and_sample_every=100,
+    ema_decay = 0.995,
+    amp = False,
+    fp16=True,
+    calculate_fid = True
+)
+
+trainer.load(233)
 
 sampled_images = diffusion.sample(batch_size = 1)
-sampled_images.shape
+print(sampled_images.shape)
+print(sampled_images.dtype)
+utils.save_image(sampled_images, str('./sample.png'))
