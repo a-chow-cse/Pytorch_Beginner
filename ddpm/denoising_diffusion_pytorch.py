@@ -800,7 +800,7 @@ class Dataset(Dataset):
         self.transform = T.Compose([
             T.Lambda(maybe_convert_fn),
             #T.Resize(image_size),
-            #T.RandomHorizontalFlip() if augment_horizontal_flip else nn.Identity(),
+            T.RandomHorizontalFlip() if augment_horizontal_flip else nn.Identity(),
             #T.CenterCrop(image_size),
             T.ToTensor()
         ])

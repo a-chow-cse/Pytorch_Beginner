@@ -21,7 +21,7 @@ trainer = Trainer(
     './ddpm_datasets/ThreeFromBoth/',
     train_batch_size= 4,
     train_lr = 1e-4,
-    train_num_steps = 50000,
+    train_num_steps = 60000,
     gradient_accumulate_every = 2,
     save_and_sample_every=100,
     ema_decay = 0.995,
@@ -30,7 +30,7 @@ trainer = Trainer(
     calculate_fid = True,
     num_samples=16
 )
-trainer.load(359)
+#trainer.load(479)
 
 trainer.train()
 

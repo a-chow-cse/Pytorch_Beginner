@@ -29,7 +29,7 @@ trainer = Trainer(
     calculate_fid = True
 )
 
-trainer.load(470)
+#trainer.load(255)
 
 sampled_images = diffusion.sample(batch_size = 1)
 print(sampled_images.shape)
