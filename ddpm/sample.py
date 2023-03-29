@@ -12,7 +12,7 @@ diffusion = GaussianDiffusion (
     model,
     image_size = 128,
     timesteps = 1000,
-    #sampling_timesteps = 250,
+    sampling_timesteps = 1000,
     loss_type = 'l1'
 )
 trainer = Trainer(
@@ -29,7 +29,7 @@ trainer = Trainer(
     calculate_fid = True
 )
 
-trainer.load(233)
+trainer.load(470)
 
 sampled_images = diffusion.sample(batch_size = 1)
 print(sampled_images.shape)

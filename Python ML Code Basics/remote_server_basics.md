@@ -30,3 +30,11 @@ But, if you write, ` scp -r a_1/ destination/` , you will have,
     - c_1
     - c_2
 - b_2
+
+## In case of binding error
+```
+RuntimeError: The server socket has failed to listen on any local network address. The server socket has failed to bind to [::]:29500 (errno: 98 - Address already in use). The server socket has failed to bind to 0.0.0.0:29500 (errno: 98 - Address already in use).
+```
+Run the following commands:
+- `ps -fA | grep python`
+- `kill -9 pid` (pid from the list generated above)
