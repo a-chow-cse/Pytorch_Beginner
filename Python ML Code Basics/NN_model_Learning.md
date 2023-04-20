@@ -59,3 +59,13 @@ model.fc = nn.linear(512,10)
     - do model.zero_grad() to zero the gradient
     - loss.backward() to calculate grad
     - optimizer.step() to update the parameters
+
+## Load Pretrained Model
+- create or initialize a model architecture same as pretrained model.
+- load the model
+```python
+state_dict = torch.load(path/to/model)
+```
+- When you call `torch.load()` on a file which contains GPU tensors, those tensors will be loaded to GPU by default. 
+ - You can call `torch.load(.., map_location='cpu')` if you want to use cpu. 
+ - You can also specify the gpu you want to use by `torch.load(.., map_location=lambda storage, loc: storage.cuda(1)`

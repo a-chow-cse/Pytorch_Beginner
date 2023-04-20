@@ -1,3 +1,11 @@
+## In case **torch.cuda.is_available() == false**
+- create a virtual environment through .yml file
+- activate the virtual environment
+- run the following
+```
+pip3 install torch torchvision torchaudio -f https://download.pytorch.org/whl/cu111/torch_stable.html
+```
+- It should work!
 ## Multiple GPU
 Use the following command to train the diffusion model on four gpus.\
 ```

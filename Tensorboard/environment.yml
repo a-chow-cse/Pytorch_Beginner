@@ -3,3 +3,5 @@ dependencies:
   - numpy
   - torchvision
   - pillow
+  - torch
+  - torchaudio
