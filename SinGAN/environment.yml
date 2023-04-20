@@ -1,0 +1,11 @@
+name: singan
+dependencies: 
+  - matplotlib
+  - pillow==6.1
+  - scikit-image
+  - scikit-learn
+  - scipy
+  - numpy
+  - pytorch <=1.4
+  - torchvision ==0.4.0
+  - pyqt
