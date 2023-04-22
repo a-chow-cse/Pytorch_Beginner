@@ -1,3 +1,5 @@
+### **Delete connection to remote git**
+Go to the folder and run `rm -rf .git/`
 ### **Upload a newly cloned repo inside your already owned repo**
 `git clone git::repo_link `\
 `git add <newly cloned repo folder>/`

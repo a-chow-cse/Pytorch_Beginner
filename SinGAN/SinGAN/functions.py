@@ -1,6 +1,5 @@
 import torch
 import matplotlib
-matplotlib.use('Qt5Agg')
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import numpy as np
@@ -155,6 +154,8 @@ def read_image(opt):
     return x
 
 def read_image_dir(dir,opt):
+    print(dir)
+    print(opt)
     x = img.imread('%s' % (dir))
     x = np2torch(x,opt)
     x = x[:,0:3,:,:]
@@ -344,10 +345,12 @@ def dilate_mask(mask,opt):
         element = morphology.disk(radius=20)
     mask = torch2uint8(mask)
     mask = mask[:,:,0]
-    mask = morphology.binary_dilation(mask,selem=element)
-    mask = filters.gaussian(mask, sigma=5)
+    mask = morphology.binary_dilation(mask,footprint=element)
+    mask = filters.gaussian(mask, sigma=3)
     nc_im = opt.nc_im
     opt.nc_im = 1
+    mask=np.expand_dims(mask, axis=-1)
+    mask = np.concatenate([mask]*3, axis=-1)
     mask = np2torch(mask,opt)
     opt.nc_im = nc_im
     mask = mask.expand(1, 3, mask.shape[2], mask.shape[3])
