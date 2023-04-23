@@ -1,7 +1,0 @@
-name: tensorboard
-dependencies:
-  - numpy
-  - torchvision
-  - pillow
-  - torch
-  - torchaudio
