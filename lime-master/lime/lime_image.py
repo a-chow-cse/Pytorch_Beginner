@@ -13,6 +13,8 @@ from tqdm.auto import tqdm
 
 from . import lime_base
 from .wrappers.scikit_image import SegmentationAlgorithm
+import matplotlib.pyplot as plt
+from PIL import Image
 
 
 class ImageExplanation(object):
@@ -183,6 +185,12 @@ class LimeImageExplainer(object):
                                                     random_seed=random_seed)
         segments = segmentation_fn(image)
 
+        #/////////
+        segment= segments.astype(np.uint8)
+        img = Image.fromarray(segment)
+        img.save('segments.png')
+        #/////////
+
         fudged_image = image.copy()
         if hide_color is None:
             for x in np.unique(segments):
@@ -251,9 +259,21 @@ class LimeImageExplainer(object):
         data = self.random_state.randint(0, 2, num_samples * n_features)\
             .reshape((num_samples, n_features))
         labels = []
-        data[0, :] = 1
+        data[0, :] = 1 #make first photo with no segment
         imgs = []
         rows = tqdm(data) if progress_bar else data
+
+        #uu=0
+        """
+        First we create num_samples of input shaped data, which contains random 0 and 1.
+        then, we iterate through the number of samples,
+            - copy the original image
+            - create a mask with the shape of segments/input as all values=false
+            - now make the pixels== true where there is value in segments and original image matches.
+            - Now make those pixels black in temp image.
+
+            This following loop generates images with masks from segmented algorithm. This is the part to change.
+        """
         for row in rows:
             temp = copy.deepcopy(image)
             zeros = np.where(row == 0)[0]
@@ -261,6 +281,8 @@ class LimeImageExplainer(object):
             for z in zeros:
                 mask[segments == z] = True
             temp[mask] = fudged_image[mask]
+
+
             imgs.append(temp)
             if len(imgs) == batch_size:
                 preds = classifier_fn(np.array(imgs))
