@@ -186,9 +186,7 @@ class LimeImageExplainer(object):
         segments = segmentation_fn(image)
 
         #/////////
-        segment= segments.astype(np.uint8)
-        img = Image.fromarray(segment)
-        img.save('segments.png')
+        print(segments)
         #/////////
 
         fudged_image = image.copy()

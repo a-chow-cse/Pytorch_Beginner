@@ -40,5 +40,5 @@ def check_channels_in_mask():
     cv2.imwrite("b.png",channels[2])
 
 # Open the PNG image
-n_path='./Harmonization/another_butterfly.png'
+n_path='./Harmonization/original_butterfly_input.png'
 convert_to_jpg(n_path)
